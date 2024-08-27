@@ -1,5 +1,4 @@
 version: 2
-
 models:
   - name: customers
     description: One record per customer
@@ -9,9 +8,34 @@ models:
         tests:
           - unique
           - not_null
+        meta:
+          dimension:
+            type: number
       - name: first_order_date
         description: NULL when a customer has not yet placed an order.
-
+        meta:
+          dimension:
+            type: date
+      - name: first_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: last_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: most_recent_order_date
+        description: ""
+        meta:
+          dimension:
+            type: date
+      - name: number_of_orders
+        description: ""
+        meta:
+          dimension:
+            type: number
   - name: stg_customers
     description: This model cleans up customer data
     columns:
@@ -20,7 +44,19 @@ models:
         tests:
           - unique
           - not_null
-
+        meta:
+          dimension:
+            type: number
+      - name: first_name
+        description: ""
+        meta:
+          dimension:
+            type: string
+      - name: last_name
+        description: ""
+        meta:
+          dimension:
+            type: string
   - name: stg_orders
     description: This model cleans up order data
     columns:
@@ -29,13 +65,34 @@ models:
         tests:
           - unique
           - not_null
+        meta:
+          dimension:
+            type: number
       - name: status
         tests:
           - accepted_values:
-              values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+              values:
+                - placed
+                - shipped
+                - completed
+                - return_pending
+                - returned
+        description: ""
+        meta:
+          dimension:
+            type: string
       - name: customer_id
         tests:
           - not_null
           - relationships:
               to: ref('stg_customers')
               field: customer_id
+        description: ""
+        meta:
+          dimension:
+            type: number
+      - name: order_date
+        description: ""
+        meta:
+          dimension:
+            type: date
