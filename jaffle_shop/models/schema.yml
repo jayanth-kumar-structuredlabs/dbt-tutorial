@@ -78,7 +78,7 @@ models:
             type: string
           metrics:
             total_order_count:
-              type: count_distinct
+              type: count
       - name: customer_id
         tests:
           - not_null
