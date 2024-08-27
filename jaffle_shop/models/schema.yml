@@ -76,6 +76,9 @@ models:
         meta:
           dimension:
             type: string
+          metrics:
+            total_order_count:
+              type: count_distinct
       - name: customer_id
         tests:
           - not_null
