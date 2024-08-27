@@ -21,11 +21,6 @@ models:
         meta:
           dimension:
             type: string
-      # - name: last_name
-      #   description: ""
-      #   meta:
-      #     dimension:
-      #       type: string
       - name: most_recent_order_date
         description: ""
         meta:
