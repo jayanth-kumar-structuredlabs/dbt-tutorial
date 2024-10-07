@@ -1,4 +1,5 @@
 version: 2
+
 models:
   - name: customers
     description: One record per customer
@@ -11,26 +12,32 @@ models:
         meta:
           dimension:
             type: number
-      - name: first_order_date
-        description: NULL when a customer has not yet placed an order.
-        meta:
-          dimension:
-            type: date
       - name: first_name
-        description: ""
+        description: Customer's first name
         meta:
           dimension:
             type: string
+      - name: last_name
+        description: Customer's last name
+        meta:
+          dimension:
+            type: string
+      - name: first_order_date
+        description: Date of the customer's first order, NULL when a customer has not yet placed an order
+        meta:
+          dimension:
+            type: date
       - name: most_recent_order_date
-        description: ""
+        description: Date of the customer's most recent order
         meta:
           dimension:
             type: date
       - name: number_of_orders
-        description: ""
+        description: Total number of orders placed by the customer
         meta:
           dimension:
             type: number
+
   - name: stg_customers
     description: This model cleans up customer data
     columns:
@@ -43,15 +50,16 @@ models:
           dimension:
             type: number
       - name: first_name
-        description: ""
+        description: Customer's first name
         meta:
           dimension:
             type: string
       - name: last_name
-        description: ""
+        description: Customer's last name
         meta:
           dimension:
             type: string
+
   - name: stg_orders
     description: This model cleans up order data
     columns:
@@ -64,6 +72,7 @@ models:
           dimension:
             type: number
       - name: status
+        description: Current status of the order
         tests:
           - accepted_values:
               values:
@@ -72,7 +81,6 @@ models:
                 - completed
                 - return_pending
                 - returned
-        description: ""
         meta:
           dimension:
             type: string
@@ -80,17 +88,17 @@ models:
             total_order_count:
               type: count
       - name: customer_id
+        description: Foreign key to stg_customers
         tests:
           - not_null
           - relationships:
               to: ref('stg_customers')
               field: customer_id
-        description: ""
         meta:
           dimension:
             type: number
       - name: order_date
-        description: ""
+        description: Date when the order was placed
         meta:
           dimension:
             type: date
