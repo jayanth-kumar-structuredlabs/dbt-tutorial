@@ -1,5 +1,8 @@
 Setting up dbt
 
+
+
+
 - used dbt-core, not dbt-cloud
 	- warehouse (bigquery in this case) - structured-app-test
 	- github repo - shivam-singhal/dbt-tutorial
